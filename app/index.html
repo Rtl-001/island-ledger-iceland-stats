@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Island Ledger — Iceland by the numbers</title>
+<meta name="description" content="A pocket statistical portrait of Iceland: people, economy, health, education, land and regions, each figure with its source and year.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-inner">
+    <a class="brand" href="#overview" aria-label="The Island Ledger home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">
+        <span class="brand-name">The Island Ledger</span>
+        <span class="brand-sub">Iceland by the numbers</span>
+      </span>
+    </a>
+    <div class="masthead-facts" aria-label="Country quick facts">
+      <span><strong>Capital</strong> Reykjavík</span>
+      <span><strong>Currency</strong> króna (ISK)</span>
+      <span><strong>Parliament</strong> Althing, 63 seats</span>
+    </div>
+  </div>
+  <nav class="mainnav" aria-label="Sections">
+    <a href="#overview" data-route="overview">Overview</a>
+    <a href="#people" data-route="people">People</a>
+    <a href="#economy" data-route="economy">Economy</a>
+    <a href="#health" data-route="health">Health</a>
+    <a href="#education" data-route="education">Education</a>
+    <a href="#land" data-route="land">Land &amp; energy</a>
+    <a href="#regions" data-route="regions">Regions</a>
+    <a href="#notes" data-route="notes">Sources &amp; notes</a>
+  </nav>
+</header>
+
+<main id="page">
+  <section class="page" id="page-overview" aria-labelledby="overview-title">
+    <div class="hero">
+      <p class="kicker">National statistics · reference year 2024 unless noted</p>
+      <h1 id="overview-title">One island, counted carefully.</h1>
+      <p class="lede">Iceland keeps unusually complete books on itself. This ledger gathers the
+      figures a visitor, a student or a would-be resident reaches for first — who lives here,
+      what the economy earns, how long people live, what the land gives back — each with the
+      source and year it came from.</p>
+    </div>
+
+    <div class="stat-grid" id="headline-stats" aria-label="Headline figures"></div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Population, 2015–2024</h2>
+        <div class="segmented" role="group" aria-label="Chart range">
+          <button type="button" data-range="full" class="is-active">2015–2024</button>
+          <button type="button" data-range="recent">2020–2024</button>
+        </div>
+      </div>
+      <div id="chart-population" class="chart"></div>
+      <p class="source-line">Source: Statistics Iceland, population on 1 January; rounded to the nearest thousand.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Find an indicator</h2>
+        <label class="searchbox">
+          <span class="searchbox-label">Search</span>
+          <input id="indicator-search" type="search" placeholder="Try “tourism”, “glacier”, “doctors”…" autocomplete="off">
+        </label>
+      </div>
+      <ul class="indicator-list" id="indicator-list"></ul>
+      <p class="source-line" id="indicator-count"></p>
+    </div>
+  </section>
+
+  <section class="page" id="page-people" aria-labelledby="people-title" hidden>
+    <h1 id="people-title">People</h1>
+    <p class="lede">Fewer than four hundred thousand residents share the island, and about two
+    in three of them live in the capital region. The population is young by European standards
+    and still growing, mostly through migration.</p>
+    <div class="stat-grid" id="people-stats"></div>
+    <div class="panel">
+      <h2>Age structure, 2024</h2>
+      <div id="chart-age" class="chart"></div>
+      <p class="source-line">Source: Statistics Iceland, age distribution 2024; shares rounded.</p>
+    </div>
+    <div class="panel">
+      <h2>Births, deaths and the balance, 2023</h2>
+      <div id="chart-vital" class="chart"></div>
+      <p class="source-line">Source: Statistics Iceland, vital statistics 2023.</p>
+    </div>
+  </section>
+
+  <section class="page" id="page-economy" aria-labelledby="economy-title" hidden>
+    <h1 id="economy-title">Economy</h1>
+    <p class="lede">Fish, aluminium and visitors pay the island's way. Incomes sit near the top
+    of the world table, unemployment is low, and prices — the ledger's sore line — run high.</p>
+    <div class="stat-grid" id="economy-stats"></div>
+    <div class="panel">
+      <div class="panel-head">
+        <h2>GDP per person</h2>
+        <div class="segmented" role="group" aria-label="Currency unit">
+          <button type="button" data-unit="usd" class="is-active">US dollars</button>
+          <button type="button" data-unit="isk">króna (millions)</button>
+        </div>
+      </div>
+      <div id="chart-gdp" class="chart"></div>
+      <p class="source-line">Source: World Bank, GDP per capita (current prices); króna values converted at each year's average rate and rounded.</p>
+    </div>
+    <div class="panel">
+      <h2>What the island sells abroad, 2023</h2>
+      <div id="chart-exports" class="chart"></div>
+      <p class="source-line">Source: Statistics Iceland, exports of goods and services 2023; shares rounded.</p>
+    </div>
+    <div class="panel">
+      <h2>Visitors arriving, 2015–2024</h2>
+      <div id="chart-visitors" class="chart"></div>
+      <p class="source-line">Source: Icelandic Tourist Board, foreign visitors through Keflavík airport.</p>
+    </div>
+  </section>
+
+  <section class="page" id="page-health" aria-labelledby="health-title" hidden>
+    <h1 id="health-title">Health</h1>
+    <p class="lede">Icelanders are among the longest-lived people on Earth. Care is public and
+    universal, infant deaths are rare, and the remaining health worries look familiar:
+    weight, drink and long winter darkness.</p>
+    <div class="stat-grid" id="health-stats"></div>
+    <div class="panel">
+      <h2>Life expectancy at birth, 2023</h2>
+      <div id="chart-life" class="chart"></div>
+      <p class="source-line">Source: Statistics Iceland, life tables 2023.</p>
+    </div>
+  </section>
+
+  <section class="page" id="page-education" aria-labelledby="education-title" hidden>
+    <h1 id="education-title">Education</h1>
+    <p class="lede">Schooling is free and compulsory to age sixteen, and nearly half of adults
+    hold a university degree. Students abroad are common — the island exports its young and,
+    increasingly, imports them back with qualifications.</p>
+    <div class="stat-grid" id="education-stats"></div>
+    <div class="panel">
+      <h2>Students by level, school year 2023–24</h2>
+      <div id="chart-students" class="chart"></div>
+      <p class="source-line">Source: Statistics Iceland, education statistics 2023–24; rounded.</p>
+    </div>
+  </section>
+
+  <section class="page" id="page-land" aria-labelledby="land-title" hidden>
+    <h1 id="land-title">Land &amp; energy</h1>
+    <p class="lede">A young island still being built: glaciers on a ninth of the land, some
+    thirty active volcanic systems, and electricity drawn almost entirely from falling water
+    and hot rock.</p>
+    <div class="stat-grid" id="land-stats"></div>
+    <div class="panel">
+      <h2>Where the electricity comes from, 2023</h2>
+      <div id="chart-power" class="chart"></div>
+      <p class="source-line">Source: National Energy Authority of Iceland (Orkustofnun), electricity generation 2023.</p>
+    </div>
+    <div class="panel">
+      <h2>Carbon dioxide per person, 2015–2022</h2>
+      <div id="chart-co2" class="chart"></div>
+      <p class="source-line">Source: Environment Agency of Iceland, greenhouse-gas inventory; tonnes per resident.</p>
+    </div>
+  </section>
+
+  <section class="page" id="page-regions" aria-labelledby="regions-title" hidden>
+    <h1 id="regions-title">Regions</h1>
+    <p class="lede">Eight statistical regions divide the island. One of them — the capital
+    region — holds nearly two-thirds of everyone; the Westfjords hold fewer people than a
+    single Reykjavík suburb.</p>
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Population by region, 2024</h2>
+        <label class="searchbox">
+          <span class="searchbox-label">Filter</span>
+          <input id="region-filter" type="search" placeholder="Region name…" autocomplete="off">
+        </label>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table" id="region-table">
+          <thead>
+            <tr>
+              <th scope="col"><button type="button" data-sort="name">Region</button></th>
+              <th scope="col"><button type="button" data-sort="population">Population</button></th>
+              <th scope="col"><button type="button" data-sort="share">Share of country</button></th>
+              <th scope="col"><button type="button" data-sort="density">People per km²</button></th>
+            </tr>
+          </thead>
+          <tbody id="region-rows"></tbody>
+        </table>
+      </div>
+      <p class="source-line">Source: Statistics Iceland, population by region 2024; densities computed from regional land area. Select a column heading to sort.</p>
+    </div>
+    <div class="panel">
+      <h2>Regional shares</h2>
+      <div id="chart-regions" class="chart"></div>
+      <p class="source-line">Source: Statistics Iceland, 2024.</p>
+    </div>
+  </section>
+
+  <section class="page" id="page-notes" aria-labelledby="notes-title" hidden>
+    <h1 id="notes-title">Sources &amp; notes</h1>
+    <p class="lede">Every figure on this site is a published statistic, rounded for reading.
+    The ledger's rule: no number without its source and its year.</p>
+    <div class="panel">
+      <h2>Where the numbers come from</h2>
+      <ul class="source-list">
+        <li><strong>Statistics Iceland</strong> — population, vital statistics, regions, education, trade and prices. The national statistical office; register-based counts.</li>
+        <li><strong>World Bank</strong> — GDP per person in current US dollars, converted for the króna view at each year's average exchange rate.</li>
+        <li><strong>National Energy Authority (Orkustofnun)</strong> — electricity generation by source.</li>
+        <li><strong>Environment Agency of Iceland</strong> — greenhouse-gas inventory and land figures.</li>
+        <li><strong>Icelandic Tourist Board</strong> — foreign visitors through Keflavík airport.</li>
+        <li><strong>OECD</strong> — educational attainment and health-workforce comparisons.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h2>How to read this ledger</h2>
+      <ul class="source-list">
+        <li>Reference year 2024 unless a figure names another year beside it.</li>
+        <li>Counts are rounded — thousands for population, one decimal for rates — so shares may not sum to exactly 100.</li>
+        <li>“Visitors” counts foreign arrivals through Keflavík airport, the island's main gateway; cruise and ferry arrivals are excluded.</li>
+        <li>Regional density divides the 2024 population by the region's land area, including uninhabited highlands, which is why it reads so low.</li>
+        <li>Life expectancy is period life expectancy at birth: the average years a newborn would live at 2023 death rates.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="colophon">
+  <p>The Island Ledger is an independent summary. Figures are rounded from the sources named
+  on each page; for official series, consult Statistics Iceland.</p>
+  <p><a href="#overview">Back to the overview</a> · <a href="#notes">Sources &amp; notes</a></p>
+</footer>
+
+<script src="data.js"></script>
+<script src="charts.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
