@@ -44,6 +44,75 @@ function drawGdp(unit) {
   });
 }
 
+function drawMiniCharts() {
+  document.getElementById("chart-pop-mini").innerHTML = sparkChart(
+    POPULATION_SERIES.map((row) => ({ label: String(row.year), value: row.thousands })),
+    {
+      title: "Population of Iceland 2015 to 2024, thousands",
+      color: "#14586b",
+      floorZero: false,
+      formatValue: (value) => `${Math.round(value)}k`
+    }
+  );
+  document.getElementById("chart-visitors-mini").innerHTML = sparkChart(
+    VISITOR_SERIES.map((row) => ({ label: String(row.year), value: row.millions })),
+    {
+      title: "Foreign visitors 2015 to 2024, millions",
+      color: "#c25e3a",
+      floorZero: true,
+      formatValue: (value) => `${value.toFixed(2)}m`
+    }
+  );
+  document.getElementById("chart-power-mini").innerHTML = stackedBar(POWER_MIX, {
+    title: "Electricity generation by source, 2023"
+  });
+  document.getElementById("chart-exports-mini").innerHTML = shareBars(
+    EXPORT_SHARES.map((row) => ({ label: row.label.replace(" services", "").replace(" & metals", ""), share: row.share })),
+    { title: "Shares of exports of goods and services, 2023" }
+  );
+}
+
+const converterState = { unit: "visitors" };
+
+function formatConverterNumber(value) {
+  if (!Number.isFinite(value) || value < 0) return "—";
+  if (value >= 1000) return Math.round(value).toLocaleString("en-GB");
+  if (value >= 10) return value.toFixed(1);
+  if (value >= 1) return value.toFixed(2);
+  return value.toFixed(3);
+}
+
+function updateConverter() {
+  const input = document.getElementById("converter-total");
+  const total = Number(input.value);
+  const perResident = total / RESIDENTS_2024;
+  document.getElementById("converter-per").textContent = formatConverterNumber(perResident);
+  document.getElementById("converter-per-label").textContent = `${converterState.unit} per resident`;
+  document.getElementById("converter-per1000").textContent = formatConverterNumber(perResident * 1000);
+  document.getElementById("converter-oneper").textContent =
+    total > 0 ? `1 per ${formatConverterNumber(RESIDENTS_2024 / total)}` : "—";
+}
+
+function wireConverter() {
+  const input = document.getElementById("converter-total");
+  document.querySelectorAll("[data-preset]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const preset = CONVERTER_PRESETS[Number(button.dataset.preset)];
+      document.querySelectorAll("[data-preset]").forEach((other) => other.classList.remove("is-active"));
+      button.classList.add("is-active");
+      converterState.unit = preset.unit;
+      input.value = String(preset.total);
+      updateConverter();
+    });
+  });
+  input.addEventListener("input", () => {
+    document.querySelectorAll("[data-preset]").forEach((other) => other.classList.remove("is-active"));
+    converterState.unit = "units";
+    updateConverter();
+  });
+  updateConverter();
+}
+
 function drawStaticCharts() {
   document.getElementById("chart-age").innerHTML = barChart(
     AGE_SHARES.map((row) => ({ label: row.label, value: row.share })),
@@ -228,6 +297,8 @@ fillStats("education-stats", EDUCATION_STATS);
 fillStats("land-stats", LAND_STATS);
 drawPopulation("full");
 drawGdp("usd");
+drawMiniCharts();
+wireConverter();
 drawStaticCharts();
 renderIndicators("");
 renderRegions();

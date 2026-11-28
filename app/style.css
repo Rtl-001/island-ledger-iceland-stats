@@ -123,7 +123,7 @@ body {
 main {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 26px 20px 40px;
+  padding: 16px 20px 40px;
 }
 
 .page h1 {
@@ -386,6 +386,222 @@ main {
   margin-bottom: 8px;
 }
 
+/* Cover dashboard: one-screen ledger */
+.hero--compact h1 {
+  font-size: 1.72rem;
+  margin-bottom: 4px;
+}
+
+.lede--tight {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.dash {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 10px;
+  margin: 0 0 22px;
+}
+
+.stat-grid--dense {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.stat-grid--dense .stat-card {
+  padding: 8px 10px 7px;
+}
+
+.stat-grid--dense .stat-value {
+  font-size: 1.3rem;
+  white-space: nowrap;
+}
+
+.stat-grid--dense .stat-label {
+  font-size: 0.88rem;
+  margin-top: 2px;
+}
+
+.stat-grid--dense .stat-note {
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+#people-stats,
+#economy-stats,
+#health-stats,
+#education-stats,
+#land-stats {
+  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+  margin-bottom: 22px;
+}
+
+.stat-grid--dense .stat-card:nth-child(5) {
+  border-top-color: var(--glacier);
+}
+
+.stat-grid--dense .stat-card:nth-child(6) {
+  border-top-color: var(--ember);
+}
+
+.stat-grid--dense .stat-card:nth-child(7) {
+  border-top-color: var(--moss);
+}
+
+.stat-grid--dense .stat-card:nth-child(8) {
+  border-top-color: var(--sea);
+}
+
+.converter {
+  background: var(--sea-deep);
+  color: #eef4f2;
+  border-radius: var(--radius);
+  padding: 11px 14px 9px;
+}
+
+.converter-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.converter h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.18rem;
+  margin: 0;
+  color: #ffffff;
+}
+
+.converter-badge {
+  background: var(--gold);
+  color: var(--sea-deep);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+
+.converter-text {
+  font-size: 0.88rem;
+  color: #cfe0da;
+  margin: 4px 0 8px;
+}
+
+.converter-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.converter-presets button {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: transparent;
+  color: #eef4f2;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.converter-presets button.is-active {
+  background: #ffffff;
+  color: var(--sea-deep);
+  font-weight: 700;
+}
+
+.converter-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.converter-input input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--sea-deep);
+  background: #ffffff;
+}
+
+.converter-out {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.converter-out div {
+  background: rgba(255, 255, 255, 0.09);
+  border-radius: 10px;
+  padding: 6px 8px;
+}
+
+.converter-out strong {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.28rem;
+  color: #ffffff;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.converter-out span {
+  display: block;
+  font-size: 0.7rem;
+  color: #cfe0da;
+  line-height: 1.3;
+  margin-top: 2px;
+}
+
+.converter .source-line {
+  color: #a9c4bc;
+  font-size: 0.72rem;
+}
+
+.mini-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.mini-panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 8px 10px 6px;
+}
+
+.mini-panel h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.92rem;
+  margin: 0 0 2px;
+  color: var(--sea-deep);
+}
+
+.mini-panel .source-line {
+  margin-top: 2px;
+  font-size: 0.72rem;
+}
+
+.chart .stack-label {
+  font-size: 12px;
+  font-weight: 700;
+  fill: #ffffff;
+}
+
 .colophon {
   border-top: 1px solid var(--line);
   max-width: 1080px;
@@ -427,5 +643,25 @@ main {
 
   .stat-value {
     font-size: 1.65rem;
+  }
+
+  .dash {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .stat-grid--dense {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat-grid--dense .stat-value {
+    font-size: 1.25rem;
+  }
+
+  .mini-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .converter-out strong {
+    font-size: 1.05rem;
   }
 }

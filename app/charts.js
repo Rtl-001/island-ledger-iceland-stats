@@ -54,6 +54,82 @@ function lineChart(points, options) {
   return svg;
 }
 
+// A compact sparkline for the cover dashboard: line, soft fill, end label.
+function sparkChart(points, options) {
+  const width = 320;
+  const height = 96;
+  const padLeft = 8;
+  const padRight = 8;
+  const padTop = 16;
+  const padBottom = 20;
+  const values = points.map((point) => point.value);
+  const floor = options.floorZero ? 0 : Math.min(...values) * 0.94;
+  const ceiling = Math.max(...values) * 1.04;
+  const innerW = width - padLeft - padRight;
+  const innerH = height - padTop - padBottom;
+  const xAt = (index) => padLeft + (innerW * index) / Math.max(1, points.length - 1);
+  const yAt = (value) => padTop + innerH - ((value - floor) / (ceiling - floor)) * innerH;
+
+  let svg = svgOpen(width, height, options.title);
+  const path = points
+    .map((point, index) => `${index === 0 ? "M" : "L"}${xAt(index).toFixed(1)},${yAt(point.value).toFixed(1)}`)
+    .join(" ");
+  svg += `<path d="${path} L${xAt(points.length - 1).toFixed(1)},${padTop + innerH} L${padLeft},${padTop + innerH} Z" fill="${options.color}" opacity="0.16"></path>`;
+  svg += `<path d="${path}" fill="none" stroke="${options.color}" stroke-width="2.4"></path>`;
+  const last = points[points.length - 1];
+  svg += `<circle cx="${xAt(points.length - 1).toFixed(1)}" cy="${yAt(last.value).toFixed(1)}" r="3.4" fill="${options.color}"></circle>`;
+  svg += `<text class="value-label" x="${xAt(points.length - 1).toFixed(1)}" y="${(yAt(last.value) - 8).toFixed(1)}" text-anchor="end">${options.formatValue(last.value)}</text>`;
+  svg += `<text class="axis-label" x="${padLeft}" y="${height - 5}">${points[0].label}</text>`;
+  svg += `<text class="axis-label" x="${width - padRight}" y="${height - 5}" text-anchor="end">${last.label}</text>`;
+  svg += "</svg>";
+  return svg;
+}
+
+// Compact labelled share bars for the cover dashboard.
+function shareBars(rows, options) {
+  const width = 320;
+  const rowH = 20;
+  const height = rows.length * rowH + 8;
+  const labelW = 118;
+  const valueW = 44;
+  const innerW = width - labelW - valueW;
+  const ceiling = Math.max(...rows.map((row) => row.share));
+
+  let svg = svgOpen(width, height, options.title);
+  rows.forEach((row, index) => {
+    const y = 6 + index * rowH;
+    const w = (row.share / ceiling) * innerW;
+    const color = CHART_COLORS[index % CHART_COLORS.length];
+    svg += `<text class="axis-label" x="${labelW - 6}" y="${y + 13}" text-anchor="end">${row.label}</text>`;
+    svg += `<rect x="${labelW}" y="${y}" width="${w.toFixed(1)}" height="15" rx="3" fill="${color}"><title>${row.label}: ${row.share}%</title></rect>`;
+    svg += `<text class="value-label" x="${width - 2}" y="${y + 13}" text-anchor="end">${row.share}%</text>`;
+  });
+  svg += "</svg>";
+  return svg;
+}
+
+// One stacked bar for a two-or-more-way split, with a legend line under it.
+function stackedBar(slices, options) {
+  const width = 320;
+  const height = 68;
+  const barY = 10;
+  const barH = 26;
+  const total = slices.reduce((sum, slice) => sum + slice.share, 0);
+  let x = 0;
+
+  let svg = svgOpen(width, height, options.title);
+  slices.forEach((slice, index) => {
+    const w = (slice.share / total) * width;
+    const color = CHART_COLORS[index % CHART_COLORS.length];
+    svg += `<rect x="${x.toFixed(1)}" y="${barY}" width="${w.toFixed(1)}" height="${barH}" fill="${color}"><title>${slice.label}: ${slice.share}%</title></rect>`;
+    svg += `<text class="stack-label" x="${(x + w / 2).toFixed(1)}" y="${barY + 17}" text-anchor="middle">${slice.share}%</text>`;
+    svg += `<text class="axis-label" x="${(x + w / 2).toFixed(1)}" y="${barY + barH + 16}" text-anchor="middle">${slice.label}</text>`;
+    x += w;
+  });
+  svg += "</svg>";
+  return svg;
+}
+
 // Vertical bars for {label, value} rows.
 function barChart(rows, options) {
   const width = 640;

@@ -37,16 +37,63 @@
 
 <main id="page">
   <section class="page" id="page-overview" aria-labelledby="overview-title">
-    <div class="hero">
+    <div class="hero hero--compact">
       <p class="kicker">National statistics · reference year 2024 unless noted</p>
-      <h1 id="overview-title">One island, counted carefully.</h1>
-      <p class="lede">Iceland keeps unusually complete books on itself. This ledger gathers the
-      figures a visitor, a student or a would-be resident reaches for first — who lives here,
-      what the economy earns, how long people live, what the land gives back — each with the
-      source and year it came from.</p>
+      <h1 id="overview-title">Iceland in one screen.</h1>
+      <p class="lede lede--tight">Eight headline figures, four trends and a per-person
+      converter — every number names its source and year.</p>
     </div>
 
-    <div class="stat-grid" id="headline-stats" aria-label="Headline figures"></div>
+    <div class="dash">
+      <div class="stat-grid stat-grid--dense" id="headline-stats" aria-label="Headline figures"></div>
+
+      <div class="converter" aria-labelledby="converter-title">
+        <div class="converter-head">
+          <h2 id="converter-title">Per-person converter</h2>
+          <span class="converter-badge">try it</span>
+        </div>
+        <p class="converter-text">Pick a published total — or type your own — and see what it
+        means for each of the 387,758 residents.</p>
+        <div class="converter-presets" role="group" aria-label="Preset totals">
+          <button type="button" data-preset="0" class="is-active">Visitors 2024</button>
+          <button type="button" data-preset="1">Births 2023</button>
+          <button type="button" data-preset="2">Students 2023–24</button>
+        </div>
+        <label class="converter-input">
+          <span>Total</span>
+          <input id="converter-total" type="number" min="0" step="any" value="2260000" inputmode="numeric">
+        </label>
+        <div class="converter-out">
+          <div><strong id="converter-per">5.83</strong><span id="converter-per-label">visitors per resident</span></div>
+          <div><strong id="converter-per1000">5,829</strong><span>per 1,000 residents</span></div>
+          <div><strong id="converter-oneper">1 per 0.17</strong><span>residents per unit</span></div>
+        </div>
+        <p class="source-line">Computed: total ÷ 387,758 residents (2024 · Statistics Iceland). Presets: Tourist Board 2024; Statistics Iceland 2023 &amp; 2023–24.</p>
+      </div>
+
+      <div class="mini-row">
+        <div class="mini-panel">
+          <h3>Population 2015–2024</h3>
+          <div id="chart-pop-mini" class="chart"></div>
+          <p class="source-line">Statistics Iceland, 1 January</p>
+        </div>
+        <div class="mini-panel">
+          <h3>Visitors 2015–2024</h3>
+          <div id="chart-visitors-mini" class="chart"></div>
+          <p class="source-line">Icelandic Tourist Board, millions</p>
+        </div>
+        <div class="mini-panel">
+          <h3>Electricity mix 2023</h3>
+          <div id="chart-power-mini" class="chart"></div>
+          <p class="source-line">National Energy Authority</p>
+        </div>
+        <div class="mini-panel">
+          <h3>Exports mix 2023</h3>
+          <div id="chart-exports-mini" class="chart"></div>
+          <p class="source-line">Statistics Iceland, shares</p>
+        </div>
+      </div>
+    </div>
 
     <div class="panel">
       <div class="panel-head">
@@ -78,7 +125,7 @@
     <p class="lede">Fewer than four hundred thousand residents share the island, and about two
     in three of them live in the capital region. The population is young by European standards
     and still growing, mostly through migration.</p>
-    <div class="stat-grid" id="people-stats"></div>
+    <div class="stat-grid stat-grid--dense" id="people-stats" aria-label="People figures"></div>
     <div class="panel">
       <h2>Age structure, 2024</h2>
       <div id="chart-age" class="chart"></div>
@@ -95,7 +142,7 @@
     <h1 id="economy-title">Economy</h1>
     <p class="lede">Fish, aluminium and visitors pay the island's way. Incomes sit near the top
     of the world table, unemployment is low, and prices — the ledger's sore line — run high.</p>
-    <div class="stat-grid" id="economy-stats"></div>
+    <div class="stat-grid stat-grid--dense" id="economy-stats" aria-label="Economy figures"></div>
     <div class="panel">
       <div class="panel-head">
         <h2>GDP per person</h2>
@@ -124,7 +171,7 @@
     <p class="lede">Icelanders are among the longest-lived people on Earth. Care is public and
     universal, infant deaths are rare, and the remaining health worries look familiar:
     weight, drink and long winter darkness.</p>
-    <div class="stat-grid" id="health-stats"></div>
+    <div class="stat-grid stat-grid--dense" id="health-stats" aria-label="Health figures"></div>
     <div class="panel">
       <h2>Life expectancy at birth, 2023</h2>
       <div id="chart-life" class="chart"></div>
@@ -137,7 +184,7 @@
     <p class="lede">Schooling is free and compulsory to age sixteen, and nearly half of adults
     hold a university degree. Students abroad are common — the island exports its young and,
     increasingly, imports them back with qualifications.</p>
-    <div class="stat-grid" id="education-stats"></div>
+    <div class="stat-grid stat-grid--dense" id="education-stats" aria-label="Education figures"></div>
     <div class="panel">
       <h2>Students by level, school year 2023–24</h2>
       <div id="chart-students" class="chart"></div>
@@ -150,7 +197,7 @@
     <p class="lede">A young island still being built: glaciers on a ninth of the land, some
     thirty active volcanic systems, and electricity drawn almost entirely from falling water
     and hot rock.</p>
-    <div class="stat-grid" id="land-stats"></div>
+    <div class="stat-grid stat-grid--dense" id="land-stats" aria-label="Land figures"></div>
     <div class="panel">
       <h2>Where the electricity comes from, 2023</h2>
       <div id="chart-power" class="chart"></div>
